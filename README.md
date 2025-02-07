@@ -1,6 +1,6 @@
 # Neon Finance Tracker
 
-A Next.js application to analyze and visualize your financial data from Neon Bank (Switzerland) using modern web technologies.
+A Next.js application to analyze and visualize your financial data from Neon Bank (Switzerland).
 
 ## Features
 
@@ -42,7 +42,7 @@ Open http://localhost:3000 in your browser.
 
 ## Usage
 
-- Log in to your Neon Bank account at https://www.neon-free.ch
+- Log in to your Neon Bank account
 - Navigate to Profile > Account Statements
 - Download the yearly statement in CSV format (named "Year XXXX.csv")
 - In the Neon Finance Tracker app, click on "Upload Statement"
