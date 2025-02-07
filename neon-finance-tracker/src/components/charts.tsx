@@ -7,7 +7,6 @@ import {
   XAxis,
   YAxis,
   CartesianGrid,
-  ResponsiveContainer,
   PieChart,
   Pie,
   Label,
@@ -127,7 +126,6 @@ export function DashboardCharts({
             config={chartConfig}
             className="w-full h-full"
           >
-            <ResponsiveContainer width="100%" height="100%">
               <BarChart data={chartData}>
                 <CartesianGrid vertical={false} strokeDasharray="3 3" />
                 <XAxis
@@ -158,7 +156,6 @@ export function DashboardCharts({
                   radius={[4, 4, 0, 0]}
                 />
               </BarChart>
-            </ResponsiveContainer>
           </ChartContainer>
         </CardContent>
       </Card>
@@ -205,7 +202,6 @@ export function DashboardCharts({
                 config={chartConfig}
                 className="w-full h-full"
               >
-                <ResponsiveContainer width="100%" height="100%">
                   <PieChart>
                     <ChartTooltip
                       cursor={false}
@@ -257,7 +253,6 @@ export function DashboardCharts({
                       />
                     </Pie>
                   </PieChart>
-                </ResponsiveContainer>
               </ChartContainer>
             </div>
           </CardContent>
@@ -303,7 +298,6 @@ export function DashboardCharts({
                 config={chartConfig}
                 className="w-full h-full"
               >
-                <ResponsiveContainer width="100%" height="100%">
                   <PieChart>
                     <ChartTooltip
                       cursor={false}
@@ -355,7 +349,6 @@ export function DashboardCharts({
                       />
                     </Pie>
                   </PieChart>
-                </ResponsiveContainer>
               </ChartContainer>
             </div>
           </CardContent>
