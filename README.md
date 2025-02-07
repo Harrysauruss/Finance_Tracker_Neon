@@ -2,9 +2,11 @@
 
 A Next.js application to analyze and visualize your financial data from Neon Bank (Switzerland).
 
+![Neon Finance Tracker Dashboard](./img/Screenshot%202025-02-07%20at%2022.09.38.png)
+
 ## Features
 
-* [ ] CSV file upload and parsing for Neon Bank statements
+* [x] CSV file upload and parsing for Neon Bank statements
 * [ ] Interactive financial dashboards
 * [ ] Expense categorization
 * [ ] Monthly spending analysis
@@ -36,18 +38,19 @@ yarn install
 
 3. Start the development server:
 ```bash
-next dev --turbopack
+npm run dev
 ```
 Open http://localhost:3000 in your browser.
 
 ## Usage
 
-- Log in to your Neon Bank account
-- Navigate to Profile > Account Statements
-- Download the yearly statement in CSV format (named "Year XXXX.csv")
-- In the Neon Finance Tracker app, click on "Upload Statement"
-- Select your downloaded CSV file
-- The application will automatically process and display your financial data
+1. Log in to your Neon Bank account
+2. Go to Profile > Account Statements
+3. Download your statement as CSV (typically named "Year XXXX.csv")
+4. In Neon Finance Tracker:
+   - Click "Upload Statement" on the dashboard
+   - Select your downloaded CSV file
+   - Wait for the automatic processing and categorization
 
 ## CSV File Format
 The application expects the Neon Bank CSV format with the following columns:
