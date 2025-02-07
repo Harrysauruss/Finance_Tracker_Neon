@@ -138,14 +138,14 @@ export default function Dashboard() {
         <DatePickerWithRange date={dateRange} setDate={setDateRange} />
       </div>
       <Tabs defaultValue="overview">
-        <TabsList>
-          <TabsTrigger value="overview">Overview</TabsTrigger>
-          <TabsTrigger value="transactions">Transactions</TabsTrigger>
-          <TabsTrigger value="groupedByCategory">
-            Grouped by Category
+        <TabsList className="flex flex-wrap h-auto">
+          <TabsTrigger value="overview" className="flex-shrink-0">Overview</TabsTrigger>
+          <TabsTrigger value="transactions" className="flex-shrink-0">Transactions</TabsTrigger>
+          <TabsTrigger value="groupedByCategory" className="flex-shrink-0">
+            By Category
           </TabsTrigger>
-          <TabsTrigger value="groupedByDescription">
-            Grouped by Description
+          <TabsTrigger value="groupedByDescription" className="flex-shrink-0">
+            By Description
           </TabsTrigger>
         </TabsList>
         <TabsContent value="overview">

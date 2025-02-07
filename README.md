@@ -11,7 +11,7 @@ A Next.js application to analyze and visualize your financial data from Neon Ban
 * [ ] Expense categorization
 * [ ] Monthly spending analysis
 * [ ] Transaction search and filtering
-* [ ] Responsive design for all devices
+* [x] Responsive design for all devices
 
 ## Tech Stack
 
