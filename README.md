@@ -36,7 +36,7 @@ yarn install
 
 3. Start the development server:
 ```bash
-next dev --turbopack
+npm run dev
 ```
 Open http://localhost:3000 in your browser.
 
