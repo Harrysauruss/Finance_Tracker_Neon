@@ -14,6 +14,20 @@ export interface Transaction {
   Spaces: string
 }
 
+interface CSVRow {
+  Date: string
+  Amount: string
+  "Original amount": string
+  "Original currency": string
+  "Exchange rate": string
+  Description: string
+  Subject: string
+  Category: string
+  Tags: string
+  Wise: string
+  Spaces: string
+}
+
 export interface ParsedCSVResult {
   transactions: Transaction[]
   earliestDate: Date | undefined
@@ -24,8 +38,8 @@ export function parseCSV(file: File): Promise<ParsedCSVResult> {
   return new Promise((resolve, reject) => {
     Papa.parse(file, {
       header: true,
-      complete: (results: { data: any[]; }) => {
-        const transactions: Transaction[] = results.data.map((row: any) => ({
+      complete: (results: Papa.ParseResult<CSVRow>) => {
+        const transactions: Transaction[] = results.data.map((row: CSVRow) => ({
           Date: row.Date,
           Amount: Number.parseFloat(row.Amount),
           OriginalAmount: row["Original amount"] ? Number.parseFloat(row["Original amount"]) : null,
@@ -46,7 +60,7 @@ export function parseCSV(file: File): Promise<ParsedCSVResult> {
 
         resolve({ transactions, earliestDate, latestDate })
       },
-      error: (error: any) => {
+      error: (error: Error) => {
         reject(error)
       },
     })
