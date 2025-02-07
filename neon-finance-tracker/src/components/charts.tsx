@@ -237,7 +237,7 @@ export function DashboardCharts({
                             <>
                               <text
                                 x={viewBox.cx}
-                                y={viewBox.cy - 10}
+                                y={viewBox.cy ? viewBox.cy - 10 : 0}
                                 textAnchor="middle"
                                 className="fill-foreground text-lg font-bold"
                               >
@@ -245,7 +245,7 @@ export function DashboardCharts({
                               </text>
                               <text
                                 x={viewBox.cx}
-                                y={viewBox.cy + 10}
+                                y={viewBox.cy ? viewBox.cy + 10 : 0}
                                 textAnchor="middle"
                                 className="fill-muted-foreground text-sm"
                               >
@@ -335,7 +335,7 @@ export function DashboardCharts({
                             <>
                               <text
                                 x={viewBox.cx}
-                                y={viewBox.cy - 10}
+                                y={viewBox?.cy ? viewBox.cy - 10 : 0}
                                 textAnchor="middle"
                                 className="fill-foreground text-lg font-bold"
                               >
@@ -343,7 +343,7 @@ export function DashboardCharts({
                               </text>
                               <text
                                 x={viewBox.cx}
-                                y={viewBox.cy + 10}
+                                y={viewBox?.cy ? viewBox.cy + 10 : 0}
                                 textAnchor="middle"
                                 className="fill-muted-foreground text-sm"
                               >

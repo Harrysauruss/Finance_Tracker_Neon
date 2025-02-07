@@ -84,16 +84,6 @@ export default function Dashboard() {
     value,
   }));
 
-  const categoryData = filteredTransactions.reduce((acc, transaction) => {
-    const category = transaction.Category || "Uncategorized";
-    acc[category] = (acc[category] || 0) + Math.abs(transaction.Amount);
-    return acc;
-  }, {} as Record<string, number>);
-
-  const pieChartData = Object.entries(categoryData).map(([name, value]) => ({
-    name,
-    value,
-  }));
 
   const monthlyData = useMemo(() => {
     const monthlyTotals = filteredTransactions.reduce((acc, transaction) => {
