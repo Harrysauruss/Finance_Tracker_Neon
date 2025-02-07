@@ -11,6 +11,7 @@ import {
   Pie,
   Label,
   Cell,
+  ResponsiveContainer,
 } from "recharts";
 import {
   ChartConfig,
@@ -133,6 +134,10 @@ export function DashboardCharts({
                   tickLine={false}
                   tickMargin={10}
                   axisLine={false}
+                  interval={0}
+                  angle={-45}
+                  textAnchor="end"
+                  height={60}
                 />
                 <YAxis 
                   axisLine={false} 
@@ -161,10 +166,10 @@ export function DashboardCharts({
       </Card>
 
       <div className="grid gap-4 md:grid-cols-2">
-        <Card className="w-full min-h-[400px]">
-          <CardHeader className="flex flex-row items-center justify-between">
+        <Card className="w-full min-h-[400px] overflow-hidden">
+          <CardHeader className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <CardTitle>Income by Category</CardTitle>
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2">
               {timeframe === "monthly" && (
                 <Select
                   value={selectedMonth}
@@ -197,11 +202,12 @@ export function DashboardCharts({
             </div>
           </CardHeader>
           <CardContent className="h-[350px] pt-4">
-            <div className="h-full">
+            <div className="h-full w-full max-w-full">
               <ChartContainer
                 config={chartConfig}
                 className="w-full h-full"
               >
+                <ResponsiveContainer width="99%" height="100%">
                   <PieChart>
                     <ChartTooltip
                       cursor={false}
@@ -253,14 +259,15 @@ export function DashboardCharts({
                       />
                     </Pie>
                   </PieChart>
+                </ResponsiveContainer>
               </ChartContainer>
             </div>
           </CardContent>
         </Card>
-        <Card className="w-full min-h-[400px]">
-          <CardHeader className="flex flex-row items-center justify-between">
+        <Card className="w-full min-h-[400px] overflow-hidden">
+          <CardHeader className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <CardTitle>Expenses by Category</CardTitle>
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2">
               {timeframe === "monthly" && (
                 <Select
                   value={selectedMonth}
@@ -293,11 +300,12 @@ export function DashboardCharts({
             </div>
           </CardHeader>
           <CardContent className="h-[350px] pt-4">
-            <div className="h-full">
+            <div className="h-full w-full max-w-full">
               <ChartContainer
                 config={chartConfig}
                 className="w-full h-full"
               >
+                <ResponsiveContainer width="99%" height="100%">
                   <PieChart>
                     <ChartTooltip
                       cursor={false}
@@ -349,6 +357,7 @@ export function DashboardCharts({
                       />
                     </Pie>
                   </PieChart>
+                </ResponsiveContainer>
               </ChartContainer>
             </div>
           </CardContent>
