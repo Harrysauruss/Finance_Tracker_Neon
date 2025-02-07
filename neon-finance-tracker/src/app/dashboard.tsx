@@ -6,21 +6,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { parseCSV, ParsedCSVResult, Transaction } from "@/utils/csvParser";
-import { isWithinInterval, parse } from "date-fns";
+import { isWithinInterval, parse, format } from "date-fns";
 import { useMemo, useState } from "react";
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
-  PieChart,
-  Pie,
-  Cell,
-} from "recharts";
+import { DashboardCharts } from "@/components/charts";
 
 export default function Dashboard() {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
@@ -70,6 +58,32 @@ export default function Dashboard() {
     .filter((t) => t.Amount < 0)
     .reduce((sum, t) => sum + Math.abs(t.Amount), 0);
 
+  const expenseCategoryData = filteredTransactions
+    .filter(t => t.Amount < 0)
+    .reduce((acc, transaction) => {
+      const category = transaction.Category || "Uncategorized";
+      acc[category] = (acc[category] || 0) + Math.abs(transaction.Amount);
+      return acc;
+    }, {} as Record<string, number>);
+
+  const incomeCategoryData = filteredTransactions
+    .filter(t => t.Amount > 0)
+    .reduce((acc, transaction) => {
+      const category = transaction.Category || "Uncategorized";
+      acc[category] = (acc[category] || 0) + transaction.Amount;
+      return acc;
+    }, {} as Record<string, number>);
+
+  const expensePieChartData = Object.entries(expenseCategoryData).map(([name, value]) => ({
+    name,
+    value,
+  }));
+
+  const incomePieChartData = Object.entries(incomeCategoryData).map(([name, value]) => ({
+    name,
+    value,
+  }));
+
   const categoryData = filteredTransactions.reduce((acc, transaction) => {
     const category = transaction.Category || "Uncategorized";
     acc[category] = (acc[category] || 0) + Math.abs(transaction.Amount);
@@ -80,6 +94,37 @@ export default function Dashboard() {
     name,
     value,
   }));
+
+  const monthlyData = useMemo(() => {
+    const monthlyTotals = filteredTransactions.reduce((acc, transaction) => {
+      const date = parse(transaction.Date, "yyyy-MM-dd", new Date());
+      const monthKey = format(date, "MMM yyyy");
+      
+      if (!acc[monthKey]) {
+        acc[monthKey] = { income: 0, expenses: 0 };
+      }
+      
+      if (transaction.Amount > 0) {
+        acc[monthKey].income += transaction.Amount;
+      } else {
+        acc[monthKey].expenses += Math.abs(transaction.Amount);
+      }
+      
+      return acc;
+    }, {} as Record<string, { income: number; expenses: number }>);
+
+    return Object.entries(monthlyTotals)
+      .map(([month, totals]) => ({
+        month,
+        income: totals.income,
+        expenses: totals.expenses,
+      }))
+      .sort((a, b) => {
+        const dateA = parse(a.month, "MMM yyyy", new Date());
+        const dateB = parse(b.month, "MMM yyyy", new Date());
+        return dateA.getTime() - dateB.getTime();
+      });
+  }, [filteredTransactions]);
 
   const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#8884D8"];
 
@@ -144,61 +189,14 @@ export default function Dashboard() {
               </CardContent>
             </Card>
           </div>
-          <div className="mt-8 grid gap-4 md:grid-cols-2">
-            <Card>
-              <CardHeader>
-                <CardTitle>Income vs Expenses</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <ResponsiveContainer width="100%" height={300}>
-                  <BarChart
-                    data={[
-                      { name: "Income", amount: incomeTotal },
-                      { name: "Expenses", amount: expenseTotal },
-                    ]}
-                  >
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="name" />
-                    <YAxis />
-                    <Tooltip />
-                    <Legend />
-                    <Bar dataKey="amount" fill="#8884d8" />
-                  </BarChart>
-                </ResponsiveContainer>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader>
-                <CardTitle>Expenses by Category</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <ResponsiveContainer width="100%" height={300}>
-                  <PieChart>
-                    <Pie
-                      data={pieChartData}
-                      cx="50%"
-                      cy="50%"
-                      labelLine={false}
-                      outerRadius={80}
-                      fill="#8884d8"
-                      dataKey="value"
-                      label={({ name, percent }) =>
-                        `${name} ${(percent * 100).toFixed(0)}%`
-                      }
-                    >
-                      {pieChartData.map((entry, index) => (
-                        <Cell
-                          key={`cell-${index}`}
-                          fill={COLORS[index % COLORS.length]}
-                        />
-                      ))}
-                    </Pie>
-                    <Tooltip />
-                  </PieChart>
-                </ResponsiveContainer>
-              </CardContent>
-            </Card>
-          </div>
+          <DashboardCharts
+            incomeTotal={incomeTotal}
+            expenseTotal={expenseTotal}
+            incomePieChartData={incomePieChartData}
+            expensePieChartData={expensePieChartData}
+            COLORS={COLORS}
+            monthlyData={monthlyData}
+          />
         </TabsContent>
       </Tabs>
     </div>

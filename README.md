@@ -2,7 +2,7 @@
 
 A Next.js application to analyze and visualize your financial data from Neon Bank (Switzerland).
 
-![Neon Finance Tracker Dashboard](./img/Screenshot%202025-02-07%20at%2022.09.38.png)
+![Neon Finance Tracker Dashboard](./img/Screenshot%202025-02-07%20at%2023.26.43.png)
 
 ## Features
 
