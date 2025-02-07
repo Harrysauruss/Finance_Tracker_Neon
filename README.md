@@ -4,7 +4,7 @@ A Next.js application to analyze and visualize your financial data from Neon Ban
 
 ## Features
 
-* [ ] CSV file upload and parsing for Neon Bank statements
+* [x] CSV file upload and parsing for Neon Bank statements
 * [ ] Interactive financial dashboards
 * [ ] Expense categorization
 * [ ] Monthly spending analysis
