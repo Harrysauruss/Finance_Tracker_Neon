@@ -2,16 +2,16 @@
 
 A Next.js application to analyze and visualize your financial data from Neon Bank (Switzerland).
 
-![Neon Finance Tracker Dashboard](./img/Screenshot%202025-02-07%20at%2023.26.43.png)
+![Neon Finance Tracker Dashboard](./img/Screenshot%202025-02-08%20at%2017.54.26.png)
 
 ## Features
 
 * [x] CSV file upload and parsing for Neon Bank statements
-* [ ] Interactive financial dashboards
-* [ ] Expense categorization
-* [ ] Monthly spending analysis
+* [x] Interactive financial dashboards
+* [x] Expense categorization
+* [x] Monthly spending analysis
 * [ ] Transaction search and filtering
-* [x] Responsive design for all devices
+* [ ] Responsive design for all devices
 
 ## Tech Stack
 
